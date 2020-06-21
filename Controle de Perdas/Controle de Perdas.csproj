@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Controle_de_Perdas</RootNamespace>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="16044-9446748.jpg" />
+    <None Remove="77262391_2924490017561884_5206749631299452928_o.jpg" />
+    <None Remove="Pana.jpg" />
+    <None Remove="PananOVO.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="16044-9446748.jpg" />
+    <Resource Include="77262391_2924490017561884_5206749631299452928_o.jpg" />
+    <Resource Include="Pana.jpg" />
+    <Resource Include="PananOVO.jpg" />
+  </ItemGroup>
+
+</Project>
