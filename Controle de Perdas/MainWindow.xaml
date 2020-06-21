@@ -33,7 +33,6 @@
                 <DataGridTextColumn CanUserSort="True" Width="300" Header="Ação" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Button" Margin="619,335,0,0" Click="Button_Click" HorizontalAlignment="Left" Width="171" Height="54" VerticalAlignment="Top" Visibility="Hidden"/>
 
     </Grid>
 </Window>

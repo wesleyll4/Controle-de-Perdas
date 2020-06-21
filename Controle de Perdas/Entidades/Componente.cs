@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
-
+﻿
 namespace Controle_de_Perdas.Entidades
     {
     class Componente
@@ -138,14 +134,14 @@ namespace Controle_de_Perdas.Entidades
 
         public override string ToString()
             {
-            return "Part Number: "+ PN
-                + "|| Endereço: " + Addres+" "+ SubAdr+
-                "|| Montados: " + TotalMontado + 
-                "|| Erros de Pickup: " + TotalPickupError 
-                + "|| Erros de Recog: " + TotalRecogError + 
-                "|| Perdas: " + (TotalRecogError + TotalPickupError) ;
-            }
-
+            return "Part Number: " + PN
+                + "|| Endereço: " + Addres + " " + SubAdr +
+                "|| Montados: " + TotalMontado +
+                "|| Erros de Pickup: " + TotalPickupError
+                + "|| Erros de Recog: " + TotalRecogError +
+                "|| Perdas: " + (TotalRecogError + TotalPickupError);
             }
 
         }
+
+    }

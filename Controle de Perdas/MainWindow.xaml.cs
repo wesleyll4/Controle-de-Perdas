@@ -1,18 +1,11 @@
 ﻿using Controle_de_Perdas.Entidades;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Threading;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Globalization;
-using System.Timers;
 
 namespace Controle_de_Perdas
     {
@@ -22,8 +15,6 @@ namespace Controle_de_Perdas
     public partial class MainWindow : Window
         {
         string UltimoMPR = null;
-        string path = @"D:\kme\pt200\ProductReport\CM602-1";
-        string SourcePath = @"D:\kme\\pt200\\ProductReport\CM602-1\0000001" + ".mpr";
         System.Timers.Timer atimer;
 
 
@@ -36,14 +27,21 @@ namespace Controle_de_Perdas
             {
             try
                 {
+                // Instancia uma lista de componentes
                 var ListaDeComponentes = new List<Componente>();
 
+                // Lê todo o documento fonte e salva as linhas em uma string 
                 string lines = File.ReadAllText(SourcePath);
 
+                // Define os caracters usados para separar as strings do arquivo mpr
                 char[] delimiterChars = { '[', ']' };
+
+                //Divide o as strings do arquivo usando os separadores
                 string[] words = lines.Split(delimiterChars);
 
 
+
+                // Seprar Todo o string lido em partes de PN
                 string contagem = words[1] + words[2];
                 string[] _contagem = contagem.Split("M3000");
 
@@ -56,10 +54,13 @@ namespace Controle_de_Perdas
 
                 string Count = null;
 
+                
                 for (int i = 1; i < _contagem.Length; i++)
                     {
                     Count += _contagem[i];
                     }
+
+
 
                 string[] Componentes = Count.Split(' ');
 
@@ -70,6 +71,8 @@ namespace Controle_de_Perdas
 
                 Componente[] com = new Componente[_contagem.Length];
 
+
+                // Atribui os dados do string as propriedades do objeto Componente
                 for (int i = 1; i < _contagem.Length; i++)
                     {
                     if (com[i] == null)
@@ -130,7 +133,7 @@ namespace Controle_de_Perdas
                         com[i].TotalPerdido += com[i]._TotalPerdido();
                         com[i].Porcentagem = com[i]._porcentagem().ToString("f2", CultureInfo.InvariantCulture) + " " + "%";
 
-
+                        // Condicional para mudar a cor dos componentes com Perdas acima de 1%
                         if (com[i]._porcentagem() >= 1.0)
                             {
                             com[i].State = "State1";
@@ -139,8 +142,6 @@ namespace Controle_de_Perdas
                             {
                             com[i].State = "State2";
                             }
-
-
 
                         if (com[i].SubAdr == "1")
                             {
@@ -153,6 +154,7 @@ namespace Controle_de_Perdas
 
 
                         }
+                    // Terminar o Else 
                     else
                         {
                         com[i].Addres = _contagem[i].Split()[0];
@@ -209,6 +211,7 @@ namespace Controle_de_Perdas
                         }
                     }
 
+                // Adiciona os itens de com[] a uma lista 
                 for (int i = 1; i <= numeroDeComponentes; i++)
                     {
                     ListaDeComponentes.Add(com[i]);
@@ -219,53 +222,22 @@ namespace Controle_de_Perdas
                 //Executa a atualização do Datagrid no mesmo Thread
                 Application.Current.Dispatcher.Invoke(new Action(() => { DataGrid.ItemsSource = ListaDeComponentes; }));
 
-
-
-                foreach (var item in ListaDeComponentes)
-                    {
-                    if (item._porcentagem() >= 1.0)
-                        {
-
-                        }
-
-                    }
-
-
                 }
-            catch (Exception ex)
+            //Tratar Exceptions
+            catch (Exception)
                 {
-                // MessageBox.Show(ex.Message);
                 }
             }
 
         private void MainWindow1_Loaded_1(object sender, RoutedEventArgs e)
             {
-
-
+            // Instancia o objeto a ser observado
             FileSystemWatcher watcher = new FileSystemWatcher(@"D:\kme\pt200\ProductReport\", "*.mpr");
 
             watcher.EnableRaisingEvents = true;
             watcher.IncludeSubdirectories = true;
 
-            //watcher.Changed += Watcher_Changed;
             watcher.Created += Watcher_Created;
-            // watcher.Deleted += Watcher_Deleted;
-            // watcher.Renamed += Watcher_Renamed;
-
-            }
-
-
-        void Watcher_Changed(object sender, FileSystemEventArgs e)
-            {
-
-            }
-        void Watcher_Renamed(object sender, RenamedEventArgs e)
-            {
-
-            }
-
-        void Watcher_Deleted(object sender, FileSystemEventArgs e)
-            {
 
             }
 
@@ -274,22 +246,16 @@ namespace Controle_de_Perdas
             UltimoMPR = e.FullPath;
             try
                 {
+                // criando o Delay para evitar qlq conflito 
                 atimer = new System.Timers.Timer();
                 atimer.Interval = 2000;
                 atimer.Elapsed += Atimer_Elapsed;
-                // atimer.AutoReset = true;
+                atimer.AutoReset = true;
                 atimer.Enabled = true;
-
                 }
             catch (IOException ea)
                 {
-                // string lines = File.ReadAllText(SourcePath);
-
-
                 MessageBox.Show(ea.Message);
-                //using (StreamWriter sw = File.AppendText(TargetPath))
-
-                // sw.WriteLine("Ocorreu uma falha");
                 }
 
             }
@@ -305,22 +271,6 @@ namespace Controle_de_Perdas
 
             Split_MPR(UltimoMPR, TargetPath);
             }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-            {
-
-
-            string TargetPath = "D:\\kme\\pt200\\ProductReport\\CM602-1\\xx2.mpr";
-            if (File.Exists(TargetPath) == true)
-                {
-
-                }
-            else
-                {
-                File.Create(TargetPath);
-                }
-            }
-
         }
     }
 
