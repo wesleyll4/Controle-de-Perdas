@@ -5,7 +5,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -83,7 +82,7 @@ namespace Controle_de_Perdas
 
                     com[i].Maquina = maq;
                     com[i].Tbl = _contagem[i].Substring(0, 1);
-                    com[i].Addres = _contagem[i].Substring(5, 1);
+                    com[i].Addres = _contagem[i].Substring(4, 2);
                     com[i].SubAdr = _contagem[i].Split()[1];
                     com[i].PN = _contagem[i].Split()[3];
                     com[i].NPA += int.Parse(_contagem[i].Split()[4]);
@@ -173,7 +172,7 @@ namespace Controle_de_Perdas
                     com[i].TotalRecogError += com[i].RNPA + com[i].RNPB + com[i].RNPC + com[i].RNPD + com[i].RNPE + com[i].RNPF + com[i].RNPG + com[i].RNPH + com[i].RNPI + com[i].RNPJ + com[i].RNPK + com[i].RNPL;
 
                     com[i].TotalPerdido += com[i]._TotalPerdido();
-                    com[i].Porcentagem = com[i]._porcentagem().ToString("f2", CultureInfo.InvariantCulture) + " " + "%";
+                    com[i].Porcentagem = Math.Round(com[i]._porcentagem(), 2);
 
                     // Condicional para mudar a cor dos componentes com Perdas acima de 1%
                     if (com[i]._porcentagem() >= 1.0)
@@ -197,18 +196,34 @@ namespace Controle_de_Perdas
                     }
 
                 // Adiciona os itens de com[] a uma lista
-                for (int i = 1; i <= numeroDeComponentes; i++)
+                for (int i = 0; i <= numeroDeComponentes; i++)
                     {
-                    var c = ListaDeComponentes.FirstOrDefault(d => d.PN == com[i].PN);
+                    if (com[i] != null)
+                        {
+                        var c = ListaDeComponentes.FirstOrDefault(d => d.PN == com[i].PN && d.Addres == com[i].Addres && d.Maquina == com[i].Maquina);
 
-                    if (c != null)
-                        {
-                        ListaDeComponentes.Remove(c);
-                        ListaDeComponentes.Add(com[i]);
-                        }
-                    else
-                        {
-                        ListaDeComponentes.Add(com[i]);
+                        if (c != null)
+                            {
+                            if (com[i].Porcentagem > c.Porcentagem && c.Porcentagem != 0.0)
+                                {
+                                com[i].Status = "Porcentagem Subindo";
+                                }
+                            else if  (com[i].Porcentagem < c.Porcentagem && c.Porcentagem != 0.0)
+                                {
+                                com[i].Status = "Porcentagem baixando";
+                                }
+                            else if (com[i].Porcentagem == c.Porcentagem && c.Porcentagem != 0.0)
+                                {
+                                com[i].Status = "Porcentagem baixando";
+                                }
+
+                            ListaDeComponentes.Remove(c);
+                            ListaDeComponentes.Add(com[i]);
+                            }
+                        else
+                            {
+                            ListaDeComponentes.Add(com[i]);
+                            }
                         }
                     }
 
@@ -221,7 +236,7 @@ namespace Controle_de_Perdas
             //Tratar Exceptions
             catch (Exception e1)
                 {
-                MessageBox.Show("split " + e1.Message);
+                MessageBox.Show(e1.Message, "split ");
                 }
             }
 
@@ -249,13 +264,8 @@ namespace Controle_de_Perdas
                 }
             catch (IOException ea)
                 {
-                MessageBox.Show("watcher " + ea.Message);
+                MessageBox.Show(ea.Message, "Watcher");
                 }
-            }
-
-        private void DataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-            {
-
             }
         }
     }

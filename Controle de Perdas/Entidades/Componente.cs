@@ -1,4 +1,5 @@
 ﻿
+
 namespace Controle_de_Perdas.Entidades
     {
     class Componente
@@ -52,8 +53,9 @@ namespace Controle_de_Perdas.Entidades
         public int TotalPickupError { get; set; }
         public int TotalRecogError { get; set; }
         public double TotalPerdido { get; set; }
-        public string Porcentagem { get; set; }
+        public double Porcentagem { get; set; }
         public string State { get; set; }
+        public string Status { get; set; }
 
         public Componente()
             {

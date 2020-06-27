@@ -22,15 +22,16 @@
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn CanUserSort="True" Header="Maquina" Binding="{Binding Maquina}" />
-                <DataGridTextColumn CanUserSort="True" Header="Endereço" Binding="{Binding Endereço}" />
-                <DataGridTextColumn CanUserSort="True" Header="Part Number" Binding="{Binding PN}" />
-                <DataGridTextColumn CanUserSort="True" Header="Quantidade" Binding="{Binding TotalMontado}" />
-                <DataGridTextColumn CanUserSort="True" Header="PickUp" Binding="{Binding TotalPickupError}" />
-                <DataGridTextColumn CanUserSort="True" Header="Recog" Binding="{Binding TotalRecogError}" />
-                <DataGridTextColumn CanUserSort="True" Header="Total Perdido" Binding="{Binding TotalPerdido}" />
-                <DataGridTextColumn CanUserSort="True" Header="   %  " Binding="{Binding Porcentagem}" />
-                <DataGridTextColumn CanUserSort="True" Width="800" Header="" />
+                <DataGridTextColumn CanUserSort="True"  Header="Maquina" Binding="{Binding Maquina, Mode=OneWay}" />
+                <DataGridTextColumn CanUserSort="True" Header="TBL" Binding="{Binding Tbl, Mode=OneWay}" />
+                <DataGridTextColumn CanUserSort="True" Header="Endereço" Binding="{Binding Endereço, Mode=OneWay}" />
+                <DataGridTextColumn CanUserSort="True" Header="Part Number" Binding="{Binding PN, Mode=OneWay}" />
+                <DataGridTextColumn CanUserSort="True" Header="Quantidade" Binding="{Binding TotalMontado, Mode=OneWay}" />
+                <DataGridTextColumn CanUserSort="True" Header="PickUp" Binding="{Binding TotalPickupError, Mode=OneWay}" />
+                <DataGridTextColumn CanUserSort="True" Header="Recog" Binding="{Binding TotalRecogError, Mode=OneWay}" />
+                <DataGridTextColumn CanUserSort="True" Header="Total Perdido" Binding="{Binding TotalPerdido, Mode=OneWay}" />
+                <DataGridTextColumn CanUserSort="True" Header="   %  " Binding="{Binding Porcentagem, Mode=OneWay}" />
+                <DataGridTextColumn CanUserSort="True" Header="Status" Binding="{Binding Status, Mode=OneWay}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
