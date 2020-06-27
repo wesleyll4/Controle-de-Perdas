@@ -4,6 +4,7 @@ namespace Controle_de_Perdas.Entidades
     class Componente
         {
         public string Maquina { get; set; }
+        public string Tbl { get; set; }
         public string Addres { get; set; }
         public string SubAdr { get; set; }
         public string Endereço { get; set; }

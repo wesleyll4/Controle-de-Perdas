@@ -5,12 +5,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Controle_de_Perdas</RootNamespace>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>panafundobranco_IMy_icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="16044-9446748.jpg" />
     <None Remove="77262391_2924490017561884_5206749631299452928_o.jpg" />
     <None Remove="Pana.jpg" />
+    <None Remove="PanaFundoBranco.jpg" />
     <None Remove="PananOVO.jpg" />
   </ItemGroup>
 
@@ -18,7 +20,7 @@
     <Resource Include="16044-9446748.jpg" />
     <Resource Include="77262391_2924490017561884_5206749631299452928_o.jpg" />
     <Resource Include="Pana.jpg" />
-    <Resource Include="PananOVO.jpg" />
+    <Resource Include="PanaFundoBranco.jpg" />
   </ItemGroup>
 
 </Project>

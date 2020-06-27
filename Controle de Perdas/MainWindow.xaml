@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:Controle_de_Perdas"
         xmlns:Entidades="clr-namespace:Controle_de_Perdas.Entidades" x:Name="MainWindow1" x:Class="Controle_de_Perdas.MainWindow"
         mc:Ignorable="d"
-        Title="Controle de Perdas" Height="450" Width="800" Loaded="MainWindow1_Loaded_1" Background="Black" Icon="/16044-9446748.jpg">
-    <Grid Background="#FF3A3A3A">
-        <DataGrid ItemsSource="{Binding ListaDeComponentes}" Name="DataGrid" AutoGenerateColumns="False" RowDetailsVisibilityMode="Visible" Margin="10,10,10,10" CanUserDeleteRows="False" CanUserAddRows="False" BorderBrush="Black">
-            <DataGrid.Background>
-                <ImageBrush ImageSource="/PananOVO.jpg" Stretch="UniformToFill" TileMode="None" Opacity="0.455"/>
-            </DataGrid.Background>
+        Title="Monitor de Perdas" Height="900" Width="1600" Loaded="MainWindow1_Loaded_1" Icon="/PanaFundoBranco.jpg" WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <ImageBrush ImageSource="/PanaFundoBranco.jpg" />
+    </Window.Background>
+    <Grid>
+        <DataGrid ItemsSource="{Binding ListaDeComponentes}"  Name="DataGrid" AutoGenerateColumns="False" RowDetailsVisibilityMode="Visible" Margin="10,10,10,10" CanUserDeleteRows="False" CanUserAddRows="False" BorderBrush="Black" FontSize="32" Opacity="0.775" Background="{x:Null}" Focusable="True" IsHitTestVisible="True" CanUserSortColumns="True">
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Style.Triggers>
@@ -23,16 +23,15 @@
             </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn CanUserSort="True" Header="Maquina" Binding="{Binding Maquina}" />
-                <DataGridTextColumn CanUserSort="True" Header="Endereço" Binding="{Binding Endereço}"/>
-                <DataGridTextColumn CanUserSort="True" Header="Part Number" Binding="{Binding PN}"/>
-                <DataGridTextColumn CanUserSort="True" Header="Quantidade" Binding="{Binding TotalMontado}"/>
-                <DataGridTextColumn CanUserSort="True" Header="PickUp" Binding="{Binding TotalPickupError}"/>
-                <DataGridTextColumn CanUserSort="True" Header="Recog" Binding="{Binding TotalRecogError}"/>
-                <DataGridTextColumn CanUserSort="True" Header="Total Perdido" Binding="{Binding TotalPerdido}"/>
-                <DataGridTextColumn CanUserSort="True" Header="   %  " Binding="{Binding Porcentagem}"/>
-                <DataGridTextColumn CanUserSort="True" Width="300" Header="Ação" />
+                <DataGridTextColumn CanUserSort="True" Header="Endereço" Binding="{Binding Endereço}" />
+                <DataGridTextColumn CanUserSort="True" Header="Part Number" Binding="{Binding PN}" />
+                <DataGridTextColumn CanUserSort="True" Header="Quantidade" Binding="{Binding TotalMontado}" />
+                <DataGridTextColumn CanUserSort="True" Header="PickUp" Binding="{Binding TotalPickupError}" />
+                <DataGridTextColumn CanUserSort="True" Header="Recog" Binding="{Binding TotalRecogError}" />
+                <DataGridTextColumn CanUserSort="True" Header="Total Perdido" Binding="{Binding TotalPerdido}" />
+                <DataGridTextColumn CanUserSort="True" Header="   %  " Binding="{Binding Porcentagem}" />
+                <DataGridTextColumn CanUserSort="True" Width="800" Header="" />
             </DataGrid.Columns>
         </DataGrid>
-
     </Grid>
 </Window>
