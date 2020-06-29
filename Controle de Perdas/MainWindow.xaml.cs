@@ -25,12 +25,18 @@ namespace Controle_de_Perdas
             InitializeComponent();
             var Diretorio = new DirectoryInfo(@"D:\kme\pt200\ProductReport\");
 
+            try
+                {
+                var LastFile = (from f in Diretorio.GetFiles("*.mpr", SearchOption.AllDirectories)
+                                orderby f.LastWriteTime descending
+                                select f).First().FullName.ToString();
 
-            var LastFile = (from f in Diretorio.GetFiles("*.mpr", SearchOption.AllDirectories)
-                            orderby f.LastWriteTime descending
-                            select f).First().FullName.ToString();
+                Split_MPR(LastFile);
+                }
+            catch
+                {
 
-             Split_MPR(LastFile);
+                }
 
             }
 
