@@ -54,14 +54,14 @@ namespace Controle_de_Perdas
                 string[] words = lines.Split(delimiterChars);
 
                 // Seprar Todo o string lido em partes de PN
-                string contagem = words[7] + words[8];
-                string[] _contagem = contagem.Split("STB");
+                string contagem = words[11] + words[12];
+                string[] _contagem = contagem.Split(new [] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
-                string PickupError = words[9] + words[10];
-                string[] _pickUpError = PickupError.Split("STB");
+                string PickupError = words[13] + words[14];
+                string[] _pickUpError = PickupError.Split(new [] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
-                string RecogError = words[11] + words[12];
-                string[] _recogError = RecogError.Split("STB");
+                string RecogError = words[15] + words[16];
+                string[] _recogError = RecogError.Split(new [] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
                 string Count = null;
 
@@ -81,14 +81,14 @@ namespace Controle_de_Perdas
                 Componente[] com = new Componente[_contagem.Length];
 
                 // Atribui os dados do string as propriedades do objeto Componente
-                for (int i = 1; i < _contagem.Length; i++)
+                for (int i = 2; i < _contagem.Length - 2; i++)
                     {
                     com[i] = new Componente();
 
 
                     com[i].Maquina = maq;
                     com[i].Tbl = _contagem[i].Substring(0, 1);
-                    com[i].Addres = _contagem[i].Substring(4, 2);
+                    com[i].Addres = _contagem[i].Substring(3, 2);
                     com[i].SubAdr = _contagem[i].Split()[1];
                     com[i].PN = _contagem[i].Split()[3];
                     com[i].NPA += int.Parse(_contagem[i].Split()[4]);
@@ -104,7 +104,7 @@ namespace Controle_de_Perdas
                     com[i].NPK += int.Parse(_contagem[i].Split()[14]);
                     com[i].NPL += int.Parse(_contagem[i].Split()[15]);
 
-                    for (int j = 1; j < _pickUpError.Length; j++)
+                    for (int j = 1; j < _pickUpError.Length - 2; j++)
                         {
                         if (_pickUpError[j].Split()[3] == com[i].PN)
                             {
@@ -138,7 +138,7 @@ namespace Controle_de_Perdas
                             }
                         }
 
-                    for (int j = 1; j < _recogError.Length; j++)
+                    for (int j = 1; j < _recogError.Length - 2; j++)
                         {
                         if (_recogError[j].Split()[3] == com[i].PN)
                             {
